@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+    <!-- FHIR Script -->
+    <script src="/getPatient.js"></script>
+</head>
+
+<body>
+    <!-- Sidebar Start -->
+    <div class="sidebar">
+        <div class="logo_content">
+            <a href="/index.html">
+                <div class="logo">
+                    <i class="bx bx-buildings"></i>
+                    <div class="logo_name">HIS</div>
+                </div>
+            </a>
+        </div>
+        <ul class="nav_list">
+            <li>
+                <a href="#">
+                    <i class="bx bx-grid-alt"></i>
+                    <span class="links_name">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bx-user-plus"></i>
+                    <span class="links_name">New Patient</span>
+                </a>
+            </li>
+            <li>
+                <a href="/getPatient.html">
+                    <i class="bx bx-list-ul"></i>
+                    <span class="links_name">Patient List</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bx bx-cog"></i>
+                    <span class="links_name">Setting</span>
+                </a>
+            </li>
+        </ul>
+        <div class="profile_content">
+            <div class="profile">
+                <div class="profile_details">
+                    <i class="bx bx-user" id="userphoto"></i>
+                    <div class="name_job">
+                        <div class="name">李旭婷</div>
+                        <div class="job">Doctor</div>
+                    </div>
+                </div>
+                <i class="bx bx-log-out" id="logout"></i>
+            </div>
+        </div>
+    </div>
+    <!-- Sidebar End -->
+    <div class="home_content">
+        <div class="content">
+            <form action="GET">
+                <label for="">ID</label>
+                <input type="text">
+            </form>
+        </div>
+    </div>
+</body>
+
+</body>
+
+</html>
