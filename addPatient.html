@@ -8,6 +8,7 @@
     <title>Document</title>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="content.css" />
     <!-- Boxicons CDN Link -->
     <link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
     <!-- FHIR Script -->
@@ -65,16 +66,41 @@
         </div>
     </div>
     <!-- Sidebar End -->
-    <div class="home_content">
-        <div class="content">
-            <form action="GET">
-                <label for="">ID</label>
-                <input type="text">
-            </form>
-        </div>
+    <!-- Content Start -->
+    <div class="content">
+        <form action="" method="GET">
+            <h3>基本資料</h3>
+            <div class="">
+                <label class="">姓名</label>
+                <input type="text" class="" id="name">
+            </div>
+            <div class="">
+                <label class="">身分證字號</label>
+                <input type="text" class="" id="identifier">
+            </div>
+            <div class="">
+                <label class="">性別</label>
+                <input type="radio" id="gender-male" name="gender" class="">
+                <label class="" for="gender-male">男性</label>
+                <input type="radio" id="gender-female" name="gender" class="">
+                <label class="" for="gender-female">女性</label>
+            </div>
+            <div class="">
+                <label class="">出生年月日</label>
+                <input type="date" class="" id="birthDate">
+            </div>
+            <h3>聯絡資料（非必填）</h3>
+            <div class="">
+                <label class="col-sm-2 col-form-label">電話</label>
+                <input type="text" class="" id="telecom">
+            </div>
+            <div class="">
+                <label class="">地址</label>
+                <input type="text" class="" id="address">
+            </div>
+            <button type="submit">Submit</button>
+        </form>
     </div>
-</body>
-
 </body>
 
 </html>
