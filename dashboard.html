@@ -14,7 +14,6 @@
     <script src="/getPatient.js"></script>
     <!-- D3 Script -->
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="/d3js.js"></script>
 </head>
 
 <body>
@@ -70,25 +69,90 @@
         <p></p>
     </div>
     <script>
-        d3.select(".content")
-            .selectAll("p")
-            .text("hello world")
+        const testapi = "http://140.123.173.244:8080/fhir/Patient/";
+        const id = 2;
+        d3.json(testapi, data => {
+            let patientList = data.entry;
+            // console.log(patientList);
+            patientList.map(entry => {
+                var dd = entry.resource.gender;
+                // console.log(entry);
+                var svg = d3.select("body")
+                    .selectAll(".content")
+                    .append("svg")
+                    .attr("width", 800)
+                    .attr("height", 800)
+                    .append("g")
+                    .attr("transform", "translate(150,150)");
 
-        // var color = [d3.rgb(214, 39, 40), d3.rgb(31, 119, 180), d3.rgb(174, 199, 232), d3.rgb(255, 127, 14), d3.rgb(255,
-        //     187, 120), d3.rgb(44, 160, 44), d3.rgb(152, 223, 138)]
+                var color = d3.scale.ordinal()
+                    .range(["#abc5c5", "#89a68a"]);
 
-        // var arcs = svg.selectAll("p")
-        //     .data(pieData)
+                var arc1 = d3.svg.arc()
+                    //設定內、外圓形的半徑大小
+                    .outerRadius(100)
+                    .innerRadius(0);
+
+                const mpie = d3.pie().value(dd)
+
+                svg
+                    .selectAll('path')
+                    .data(mpie)
+                    .enter()
+                    .append('g')
+                    .append('path')
+                    .attr('d', arc)
+                    .attr('fill', d => chartColor[d.name].color)
+            })
+        });
+
+        // var svg = d3.select("body")
+        //     .selectAll(".content")
+        //     .append("svg")
+        //     .attr("width", 800)
+        //     .attr("height", 800)
+        //     .append("g")
+        //     //因為原點座標0,0在左上角，所以必須位移到指定的位置上，
+        //     //否則會因為在畫圓時，圓心座標在0,0而導致部份圖形被裁切。
+        //     //位移就是在原本的座標上加上移動的數值。
+        //     .attr("transform", "translate(150,150)");
+
+        // //定義顏色
+        // var color = d3.scale.ordinal()
+        //     .range(["#abc5c5", "#89a68a", "#6b5488", "#6a456c"]);
+
+        // //資料
+        // var dd = [10, 20, 30, 40];
+
+        // //繪製圖餅圖，必備的三個：
+        // //d3.svg.arc()
+        // //d3.layout.pie()
+        // //.append("path") 
+
+        // //利用arc來產生圓形的accessor函數，
+        // //函數包含有內、外圓的角度起迄，
+        // //內、外圓的半徑
+        // var arc1 = d3.svg.arc()
+        //     //設定內、外圓形的半徑大小
+        //     .outerRadius(100)
+        //     .innerRadius(0);
+
+        // //建立一個layout pie物件，無排序
+        // var pie = d3.layout.pie()
+        //     .sort(null);
+
+        // var g1 = svg.selectAll("g")
+        //     .data(pie(dd))
         //     .enter()
         //     .append("g")
-        //     .attr("transform", "translate(" + (width / 2) + "," + (height / 2) + ")")
+        //     //實際畫圓的方式是以SVG圖形路徑（Path）來繪製
         //     .append("path")
-        //     .attr("fill", function (d, i) {
-        //         return color[i]
-        //     })
-        //     .attr("d", function (d) {
-        //         return arc(d)
-        //     })
+        //     //路徑的部份要設定在d屬性中，所以套入arc1函數，
+        //     //d3.js會依據資料配合arc1函數產出Path所需的路徑
+        //     .attr("d", arc1)
+        //     .style("fill", function (d) {
+        //         return color(d.data);
+        //     });
     </script>
 </body>
 
