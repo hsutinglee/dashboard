@@ -10,3 +10,16 @@
   color: #1b1b31;
   margin: 12px;
 }
+
+.chart {
+  padding: 3%;
+  position: absolute;
+  height: 100%;
+  width: 85%;
+  left: 40%;
+  text-align: left;
+  font-size: 25px;
+  font-weight: 500;
+  color: #1b1b31;
+  margin: 12px;
+}
