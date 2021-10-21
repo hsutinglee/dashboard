@@ -61,7 +61,9 @@
         let genderlist = [0, 0];
         let age = [];
         let agenum = [];
-        var year;
+        let today = new Date();
+        let year = today.getFullYear();
+        let hasyear = false;
 
         fetch(testapi)
             .then((res) => res.json())
@@ -79,17 +81,21 @@
                     }
 
                     if (agedata != undefined) {
-                        year = agedata.substr(0, 4);
+                        year = year - agedata.substr(0, 4);
 
                         for (let i = 0; i <= age.length; i++) {
                             if (age[i] == year) {
                                 agenum[i] += 1;
-                            } else {
-                                age[age.length] = year;
-                                agenum[age.length] = 1;
+                                hasyear = true;
                                 break;
                             }
                         }
+                        if (hasyear == false) {
+                            age[age.length] = year;
+                            agenum[agenum.length] = 1;
+                        }
+                        hasyear = false;
+                        year = today.getFullYear();
                     }
                 });
 
@@ -124,7 +130,7 @@
             .attr("transform", "translate(150,150)");
 
         //定義顏色
-        var color = d3.scale.ordinal().range(["#abc5c5", "#6a456c"]);
+        var color = d3.scale.ordinal().range(["#abc5c5", "#6a456c", "#66FF66"]);
 
         //繪製圖餅圖，必備的三個：
         //d3.svg.arc()
@@ -145,18 +151,18 @@
 
         // 直方圖
 
-        d3.select(".chart");
-        // .selectAll('div')
-        // .data(vote)
-        // .enter()
-        // .append('div')
-        // .html(function (d) {
-        //     // .html() 類似 .innerHTML，D3 允許 SVG 跟 HTML 標籤混用
-        //     return d.name + '<br>' + d.num
-        // })
-        // .style("height", function (d) {
-        //     return d.num + 'px' // 調整每個長條的高度
-        // });
+        d3.select(".chart")
+            .selectAll('div')
+            .data(agenum)
+            .enter()
+            .append('div')
+            .html(function (d) {
+                // .html() 類似 .innerHTML，D3 允許 SVG 跟 HTML 標籤混用
+                return d.name + '<br>' + d.num
+            })
+            .style("height", function (d) {
+                return d.num + 'px' // 調整每個長條的高度
+            });
     </script>
 </body>
 
